@@ -16,7 +16,7 @@
             --roxo-magico: #9B5DE5;
         }
 
-        /* ===== NOVO CURSOR E ESTILOS DOS BOTÕES SOLICITADOS ===== */
+        /* ===== CURSOR E ESTILOS GLOBAIS ===== */
         * {
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='45' height='45' viewBox='0 0 24 24'><path fill='%23FFD700' stroke='%23333333' stroke-width='1.2' stroke-linejoin='round' d='M9.5,10V4.5a2,2,0,0,1,4,0V9h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5v5.5c0,3.5-2.5,6.5-6,6.5h-3c-2.5,0-5-2-6-4.5L2.5,15.5a1.2,1.2,0,0,1,1.7-1.8L7.5,16V10Z'/></svg>") 12 2, pointer !important;
             box-sizing: border-box;
@@ -61,7 +61,6 @@
             background-color: var(--vermelho-erro);
             transform: scale(1.05);
         }
-        /* ======================================================== */
 
         body {
             margin: 0;
@@ -93,7 +92,7 @@
         }
 
         .titulo-menu {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--fundo-cards);
             font-weight: bold;
             text-align: center;
@@ -102,17 +101,17 @@
         }
 
         .subtitulo-menu {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--amarelo-dourado);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-align: center;
         }
 
         .btn-modo {
             width: 100%;
-            max-width: 450px;
-            padding: 15px 20px;
-            font-size: 1.2rem;
+            max-width: 420px;
+            padding: 14px 18px;
+            font-size: 1.1rem;
             font-weight: bold;
             border: none;
             border-radius: 15px;
@@ -129,23 +128,19 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
 
-        .btn-modo:active {
-            transform: scale(0.98);
-        }
-
         .btn-modo .modo-nome {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .btn-modo .modo-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             opacity: 0.9;
             font-weight: normal;
             text-align: center;
         }
 
         .btn-modo .modo-emoji {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         #btn-modo1 { background-color: var(--verde-esmeralda); }
@@ -164,7 +159,7 @@
         #btn-musica {
             position: absolute;
             top: 10px;
-            right: 100px;
+            right: 90px;
             background-color: var(--azul-petroleo);
             color: var(--fundo-cards);
             border: 2px solid var(--verde-esmeralda);
@@ -187,8 +182,8 @@
             color: var(--fundo-cards);
             border: 2px solid var(--verde-esmeralda);
             border-radius: 8px;
-            padding: 6px 15px;
-            font-size: 0.9rem;
+            padding: 6px 12px;
+            font-size: 0.85rem;
             font-weight: bold;
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -207,29 +202,28 @@
             flex-wrap: wrap;
             align-content: center;
             justify-content: center;
-            padding: 60px 10px 10px 10px;
+            padding: 55px 10px 10px 10px;
             box-sizing: border-box;
-            gap: 10px;
+            gap: 8px;
             overflow: hidden;
         }
 
-        /* ===== LETRA SOLTA ===== */
         .letra-solta {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: var(--azul-petroleo);
             opacity: 0;
             animation: cair 0.6s ease-out forwards;
             background-color: var(--fundo-cards);
-            border-radius: 12px;
-            padding: 8px 14px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 6px 12px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             transition: transform 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 50px;
-            min-height: 65px;
+            min-width: 45px;
+            min-height: 55px;
         }
 
         .letra-solta:hover {
@@ -237,17 +231,17 @@
         }
 
         .letra-solta.letra-pequena {
-            font-size: 2rem;
-            padding: 6px 10px;
-            min-width: 40px;
-            min-height: 50px;
+            font-size: 1.8rem;
+            padding: 5px 9px;
+            min-width: 36px;
+            min-height: 45px;
         }
 
         .letra-solta.letra-muito-pequena {
-            font-size: 1.5rem;
-            padding: 4px 8px;
-            min-width: 30px;
-            min-height: 40px;
+            font-size: 1.3rem;
+            padding: 4px 6px;
+            min-width: 28px;
+            min-height: 36px;
         }
 
         .movendo-para-caixa {
@@ -261,21 +255,19 @@
         }
 
         @keyframes cair {
-            from { opacity: 0; transform: translateY(-50vh); }
+            from { opacity: 0; transform: translateY(-40vh); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes tremer {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            50% { transform: translateX(8px); }
-            75% { transform: translateX(-8px); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
         }
 
         /* PAINEL INFERIOR */
         #painel-inferior {
-            min-height: 140px;
-            max-height: 180px;
             background-color: var(--azul-petroleo);
             display: flex;
             align-items: center;
@@ -286,6 +278,7 @@
             z-index: 10;
             flex-shrink: 0;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         .btn-controle {
@@ -293,8 +286,8 @@
             color: var(--fundo-cards);
             border: none;
             border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 0.95rem;
+            padding: 10px 14px;
+            font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
@@ -311,10 +304,10 @@
 
         /* CONTAINER DE IMAGEM */
         #container-imagem {
-            width: 100px;
-            height: 100px;
+            width: 125px;
+            height: 125px;
             background-color: var(--fundo-cards);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -326,24 +319,24 @@
         #container-imagem img {
             max-width: 95%;
             max-height: 95%;
-            border-radius: 6px;
+            border-radius: 8px;
             object-fit: contain;
         }
 
         .imagem-oculta {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--azul-petroleo);
         }
 
+        /* ÁREA DA PALAVRA COM QUEBRA AUTOMÁTICA E VISIBILIDADE INTEGRAL */
         #area-palavra {
             display: flex;
-            gap: 4px;
-            flex-wrap: nowrap;
+            gap: 5px;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            overflow-x: auto;
-            max-width: calc(100vw - 230px);
-            padding: 5px 0;
+            max-width: 100%;
+            padding: 4px;
         }
 
         .espaco-letra {
@@ -368,7 +361,7 @@
         }
 
         .espaco-letra.espaco-muito-pequeno {
-            width: 26px;
+            width: 27px;
             height: 38px;
             font-size: 1.1rem;
         }
@@ -382,9 +375,9 @@
         #campo-ditado {
             display: none;
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             padding: 10px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             border: 3px solid var(--verde-esmeralda);
             border-radius: 12px;
             text-align: center;
@@ -399,7 +392,7 @@
             text-transform: none;
         }
 
-        /* Animação de Comemoração */
+        /* TELA DE FOGOS / COMEMORAÇÃO */
         #tela-fogos {
             display: none;
             position: absolute;
@@ -426,7 +419,7 @@
         }
 
         .texto-parabens {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--fundo-cards);
             font-weight: bold;
             margin-top: 15px;
@@ -459,14 +452,14 @@
         }
 
         .texto-fim {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--fundo-cards);
             font-weight: bold;
             text-shadow: 0 0 15px var(--amarelo-dourado);
         }
 
         .texto-fim-sub {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--amarelo-dourado);
             max-width: 500px;
             line-height: 1.4;
@@ -481,8 +474,8 @@
         }
 
         .btn-fim {
-            padding: 15px 25px;
-            font-size: 1.2rem;
+            padding: 14px 24px;
+            font-size: 1.1rem;
             font-weight: bold;
             border: none;
             border-radius: 12px;
@@ -505,9 +498,9 @@
             transform: translateX(-50%);
             background-color: var(--azul-petroleo);
             color: var(--fundo-cards);
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             z-index: 100;
             border: 1px solid var(--verde-esmeralda);
@@ -517,7 +510,7 @@
         #teclado-virtual {
             display: none;
             position: fixed;
-            bottom: 145px;
+            bottom: 140px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(29, 53, 87, 0.95);
@@ -531,12 +524,12 @@
         }
 
         .tecla-virtual {
-            width: 32px;
-            height: 40px;
+            width: 30px;
+            height: 38px;
             background-color: var(--fundo-cards);
             border: 1px solid var(--verde-esmeralda);
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             color: var(--azul-petroleo);
             display: flex;
@@ -559,7 +552,7 @@
             border-color: var(--vermelho-erro);
         }
 
-        /* Animação de letra descendo no modo ditado */
+        /* Animações de acerto */
         .letra-descendo {
             position: absolute;
             font-size: 2rem;
@@ -575,7 +568,6 @@
             to { opacity: 0; transform: translateY(80px) scale(1); }
         }
 
-        /* Estrelas flutuando */
         .estrela-flutuante {
             position: absolute;
             font-size: 1.5rem;
@@ -589,7 +581,7 @@
             100% { opacity: 0; transform: translateY(-150px) scale(1.3) rotate(360deg); }
         }
 
-        /* Ajustes específicos para telas maiores (Desktop) */
+        /* ===== AJUSTES PARA COMPUTADOR (DESKTOP) ===== */
         @media (min-width: 768px) {
             .titulo-menu { font-size: 4rem; }
             .subtitulo-menu { font-size: 1.6rem; margin-bottom: 20px; }
@@ -601,7 +593,7 @@
             #container-imagem { width: 180px; height: 180px; }
             .imagem-oculta { font-size: 5rem; }
             
-            #painel-inferior { min-height: 220px; max-height: 250px; padding: 0 20px; }
+            #painel-inferior { min-height: 220px; padding: 0 20px; }
             .btn-controle { padding: 15px 20px; font-size: 1.2rem; }
             
             .espaco-letra { width: 60px; height: 80px; font-size: 3rem; }
@@ -629,7 +621,6 @@
 
     <!-- ===== MENU INICIAL ===== -->
     <div id="tela-menu">
-        <!-- ===== BOTÃO DE VOLTAR PARA A PÁGINA ANTERIOR ===== -->
         <a id="btn-voltar-pagina" href="https://letramento-vogais.vercel.app/consoantes.html">⬅ Voltar para Consoantes</a>
 
         <div class="titulo-menu">🌟 FORMANDO PALAVRAS 🌟</div>
@@ -676,7 +667,6 @@
             <button class="btn-controle" onclick="avancarFaseBotao()">Avançar ▶</button>
         </div>
 
-        <!-- Teclado virtual para modo ditado -->
         <div id="teclado-virtual"></div>
     </div>
 
@@ -710,7 +700,6 @@
     <audio id="audio-acerto-estrelinhas" src="acerto_estrelinhas.mp3"></audio>
 
     <script>
-        // ===== FUNÇÃO TELA CHEIA =====
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
@@ -723,9 +712,7 @@
             }
         }
 
-        // ===== PALAVRAS ORGANIZADAS DIDATICAMENTE =====
         const fases = [
-            // === MONOSSÍLABAS (20 palavras) ===
             { palavra: "PÁ", imagem: "pa.png" },
             { palavra: "PÉ", imagem: "pe.png" },
             { palavra: "PÓ", imagem: "po.png" },
@@ -746,8 +733,6 @@
             { palavra: "CÃO", imagem: "cao.png" },
             { palavra: "EU", imagem: "eu.png" },
             { palavra: "MEL", imagem: "mel.png" },
-
-            // === DISSÍLABAS (50 palavras) ===
             { palavra: "BEBÊ", imagem: "bebe.png" },
             { palavra: "BOCA", imagem: "boca.png" },
             { palavra: "BOLA", imagem: "bola.png" },
@@ -798,8 +783,6 @@
             { palavra: "BAMBU", imagem: "bambu.png" },
             { palavra: "SUCO", imagem: "suco.png" },
             { palavra: "MAÇÃ", imagem: "maca.png" },
-
-            // === TRISSÍLABAS (30 palavras) ===
             { palavra: "BANANA", imagem: "banana.png" },
             { palavra: "BONECA", imagem: "boneca.png" },
             { palavra: "TOMATE", imagem: "tomate.png" },
@@ -830,8 +813,6 @@
             { palavra: "ESCADA", imagem: "escada.png" },
             { palavra: "ESCOLA", imagem: "escola.png" },
             { palavra: "ESCOVA", imagem: "escova.png" },
-
-            // === POLISSÍLABAS (30 palavras) ===
             { palavra: "ABACATE", imagem: "abacate.png" },
             { palavra: "BORBOLETA", imagem: "borboleta.png" },
             { palavra: "BIBLIOTECA", imagem: "biblioteca.png" },
@@ -889,7 +870,6 @@
 
         audioFundo.volume = 0.2;
 
-        // ===== FUNÇÃO DE VOZ =====
         function falarTexto(texto) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -900,7 +880,6 @@
             }
         }
 
-        // ===== INICIAR MÚSICA NO PRIMEIRO CLIQUE =====
         document.body.addEventListener('click', () => {
             if (!musicaIniciada) {
                 audioFundo.play().then(() => {
@@ -921,7 +900,6 @@
             }
         }
 
-        // ===== MENU =====
         function iniciarModo(modo) {
             modoAtual = modo;
             telaMenu.style.display = 'none';
@@ -950,7 +928,6 @@
             iniciarFase();
         }
 
-        // ===== INICIAR FASE =====
         function iniciarFase() {
             areaLetras.innerHTML = '';
             areaPalavra.innerHTML = '';
@@ -959,7 +936,7 @@
             imagemRevelada = false;
             teclasDigitadas = "";
 
-           indicadorProgresso.innerText = `Palavra ${indiceFaseAtual + 1} de ${fases.length}`;
+            indicadorProgresso.innerText = `Palavra ${indiceFaseAtual + 1} de ${fases.length}`;
 
             palavraAlvo = fases[indiceFaseAtual].palavra;
             const imagemPath = fases[indiceFaseAtual].imagem;
@@ -994,7 +971,6 @@
             }
         }
 
-        // ===== CRIAR ESPAÇOS COM TAMANHO ADAPTÁVEL =====
         function criarEspacos() {
             const tamanhoPalavra = palavraAlvo.length;
             let classeTamanho = '';
@@ -1014,7 +990,6 @@
             }
         }
 
-        // ===== ESPALHAR LETRAS COM EFEITO DE QUEDA EM CASCATA =====
         function espalharLetras() {
             const letrasEmbaralhadas = palavraAlvo.split('').sort(() => 0.5 - Math.random());
             const tamanhoPalavra = palavraAlvo.length;
@@ -1045,7 +1020,6 @@
             });
         }
 
-        // ===== TECLADO VIRTUAL =====
         function criarTecladoVirtual() {
             tecladoVirtual.innerHTML = '';
             const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÁÉÍÓÚÂÊÔÃÕ';
@@ -1164,7 +1138,6 @@
             }
         }
 
-        // ===== PROCESSAR CLIQUE NA LETRA (Modos 1 e 2) =====
         function processarCliqueLetra(letra, elementoDOM) {
             if (interagindo) return;
 
@@ -1209,7 +1182,6 @@
             }, 800);
         }
 
-        // ===== TOCAR ÁUDIO =====
         function tocarAudio(idAudio) {
             const audio = document.getElementById(idAudio);
             if (audio) {
@@ -1218,7 +1190,6 @@
             }
         }
 
-        // ===== FINALIZAR PALAVRA =====
         function finalizarPalavra() {
             interagindo = true;
             palavrasConcluidas++;
@@ -1227,7 +1198,6 @@
                 falarTexto(palavraAlvo);
             }, 500);
 
-            // Modo Figura Oculta: revela imagem
             if (modoAtual === 2 && !imagemRevelada) {
                 setTimeout(() => {
                     imagemOculta.style.display = 'none';
@@ -1239,7 +1209,6 @@
                 }, 1500);
             }
 
-            // Fim do jogo
             if (indiceFaseAtual >= fases.length - 1) {
                 setTimeout(() => {
                     tocarAudio('audio-palmas-alegria');
@@ -1249,7 +1218,6 @@
                 return;
             }
 
-            // Comemoração a cada 10 palavras
             if (palavrasConcluidas % 10 === 0) {
                 setTimeout(() => {
                     tocarAudio('audio-palmas-alegria');
@@ -1271,7 +1239,6 @@
             }
         }
 
-        // ===== AVANÇAR/VOLTAR FASE =====
         function avancarFase() {
             indiceFaseAtual++;
             if (indiceFaseAtual >= fases.length) {
