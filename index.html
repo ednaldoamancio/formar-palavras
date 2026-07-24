@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdHumanas - Alfabetização</title>
+    <title>edhumanas - Alfabetização</title>
     <style>
         :root {
             --azul-piscina: #E0F4F5;
@@ -15,6 +15,54 @@
             --laranja-claro: #E76F51;
             --roxo-magico: #9B5DE5;
         }
+
+        /* ===== NOVO CURSOR E ESTILOS DOS BOTÕES SOLICITADOS ===== */
+        * {
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'><path transform='scale(1.8) translate(3,3)' fill='%23FFFFFF' stroke='%23000000' stroke-width='1.2' stroke-linejoin='round' d='M9 11.24V7.5a2.5 2.5 0 0 1 5 0v5.5l1.76-1.5a2.12 2.12 0 0 1 2.94.13l.16.17a2.12 2.12 0 0 1 .15 2.85L14.28 20.8A4.5 4.5 0 0 1 11 22H9.5a4.5 4.5 0 0 1-4.5-4.5v-6.38l2.06-1.03a2.5 2.5 0 0 1 1.94-.15z'/></svg>") 20 15, auto !important;
+        }
+
+        #btn-tela-cheia {
+            position: absolute;
+            top: 15px;
+            right: 80px;
+            background-color: var(--azul-petroleo);
+            color: var(--fundo-cards);
+            border: 2px solid var(--verde-esmeralda);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #btn-tela-cheia:hover {
+            background-color: var(--verde-esmeralda);
+            transform: scale(1.05);
+        }
+
+        #btn-voltar-pagina {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--roxo-magico);
+            color: var(--fundo-cards);
+            border: 2px solid var(--fundo-cards);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #btn-voltar-pagina:hover {
+            background-color: var(--vermelho-erro);
+            transform: scale(1.05);
+        }
+        /* ======================================================== */
 
         body {
             margin: 0;
@@ -65,7 +113,6 @@
             font-weight: bold;
             border: none;
             border-radius: 20px;
-            cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
@@ -119,7 +166,6 @@
             width: 50px;
             height: 50px;
             font-size: 1.5rem;
-            cursor: pointer;
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: flex;
@@ -138,7 +184,6 @@
             padding: 10px 20px;
             font-size: 1rem;
             font-weight: bold;
-            cursor: pointer;
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
@@ -165,7 +210,6 @@
             font-size: 4rem;
             font-weight: bold;
             color: var(--azul-petroleo);
-            cursor: pointer;
             animation: cair 1s ease-out forwards;
             background-color: var(--fundo-cards);
             border-radius: 15px;
@@ -242,7 +286,6 @@
             padding: 15px 20px;
             font-size: 1.2rem;
             font-weight: bold;
-            cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
         }
@@ -426,7 +469,6 @@
             font-weight: bold;
             border: none;
             border-radius: 15px;
-            cursor: pointer;
             transition: transform 0.2s;
             color: var(--fundo-cards);
         }
@@ -479,7 +521,6 @@
             font-size: 1.4rem;
             font-weight: bold;
             color: var(--azul-petroleo);
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -542,9 +583,15 @@
 </head>
 <body>
 
+    <!-- ===== BOTÃO GLOBAL DE TELA CHEIA ===== -->
+    <button id="btn-tela-cheia" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+
     <!-- ===== MENU INICIAL ===== -->
     <div id="tela-menu">
-        <div class="titulo-menu">🌟 EdHumanas 🌟</div>
+        <!-- ===== BOTÃO DE VOLTAR PARA A PÁGINA ANTERIOR ===== -->
+        <button id="btn-voltar-pagina" onclick="window.location.href='https://letramento-vogais.vercel.app/consoantes.html'">⬅ Voltar para Consoantes</button>
+
+        <div class="titulo-menu">🌟 edhumanas 🌟</div>
         <div class="subtitulo-menu">Vamos formar palavras e aprender brincando!</div>
 
         <button class="btn-modo" id="btn-modo1" onclick="iniciarModo(1)">
@@ -622,8 +669,20 @@
     <audio id="audio-acerto-estrelinhas" src="acerto_estrelinhas.mp3"></audio>
 
     <script>
+        // ===== FUNÇÃO TELA CHEIA =====
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Erro ao tentar abrir tela cheia:", err);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
         // ===== PALAVRAS ORGANIZADAS DIDATICAMENTE =====
-        // Ordem: monossílabas → dissílabas → trissílabas → polissílabas
         const fases = [
             // === MONOSSÍLABAS (20 palavras) ===
             { palavra: "PÁ", imagem: "pa.png" },
@@ -683,7 +742,6 @@
             { palavra: "QUEIJO", imagem: "queijo.png" },
             { palavra: "BANHO", imagem: "banho.png" },
             { palavra: "FILHO", imagem: "filho.png" },
-            // Novas palavras dissílabas
             { palavra: "COCO", imagem: "coco.png" },
             { palavra: "CUCO", imagem: "cuco.png" },
             { palavra: "BABÁ", imagem: "baba.png" },
