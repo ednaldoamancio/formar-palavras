@@ -22,46 +22,6 @@
             box-sizing: border-box;
         }
 
-        #btn-tela-cheia {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--azul-petroleo);
-            color: var(--fundo-cards);
-            border: 2px solid var(--verde-esmeralda);
-            border-radius: 8px;
-            padding: 6px 10px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            z-index: 10000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        #btn-tela-cheia:hover {
-            background-color: var(--verde-esmeralda);
-            transform: scale(1.05);
-        }
-
-        #btn-voltar-pagina {
-            background-color: var(--roxo-magico);
-            color: var(--fundo-cards);
-            border: 2px solid var(--fundo-cards);
-            border-radius: 10px;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        #btn-voltar-pagina:hover {
-            background-color: var(--vermelho-erro);
-            transform: scale(1.05);
-        }
-
         body {
             margin: 0;
             padding: 0;
@@ -73,6 +33,28 @@
             width: 100vw;
             overflow: hidden;
             user-select: none;
+        }
+
+        /* Botão global de tela cheia no menu */
+        #btn-tela-cheia-menu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--azul-petroleo);
+            color: var(--fundo-cards);
+            border: 2px solid var(--verde-esmeralda);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #btn-tela-cheia-menu:hover {
+            background-color: var(--verde-esmeralda);
+            transform: scale(1.05);
         }
 
         /* ===== MENU INICIAL ===== */
@@ -89,6 +71,26 @@
             gap: 15px;
             padding: 20px;
             overflow-y: auto;
+        }
+
+        #btn-voltar-pagina {
+            background-color: var(--roxo-magico);
+            color: var(--fundo-cards);
+            border: 2px solid var(--fundo-cards);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #btn-voltar-pagina:hover {
+            background-color: var(--vermelho-erro);
+            transform: scale(1.05);
         }
 
         .titulo-menu {
@@ -156,28 +158,27 @@
             overflow: hidden;
         }
 
-        #btn-musica {
-            position: absolute;
-            top: 10px;
-            right: 90px;
-            background-color: var(--azul-petroleo);
-            color: var(--fundo-cards);
-            border: 2px solid var(--verde-esmeralda);
-            border-radius: 8px;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        /* CABEÇALHO DO JOGO (SEM SOBREPOSIÇÕES) */
+        #topo-jogo {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            width: 100%;
+            background-color: var(--azul-petroleo);
+            padding: 8px 12px;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
         }
 
-        #btn-voltar-menu {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+        .topo-botoes-direita {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        #btn-voltar-menu, #btn-musica, #btn-tela-cheia-topo {
             background-color: var(--azul-petroleo);
             color: var(--fundo-cards);
             border: 2px solid var(--verde-esmeralda);
@@ -185,12 +186,33 @@
             padding: 6px 12px;
             font-size: 0.85rem;
             font-weight: bold;
-            z-index: 100;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        #btn-voltar-menu:hover {
+        #btn-voltar-menu:hover, #btn-tela-cheia-topo:hover {
             background-color: var(--vermelho-erro);
+        }
+
+        #btn-musica {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            font-size: 1.1rem;
+            border-radius: 50%;
+        }
+
+        #indicador-progresso {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--fundo-cards);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid var(--verde-esmeralda);
+            text-align: center;
         }
 
         /* ===== ÁREA DE LETRAS ===== */
@@ -202,14 +224,14 @@
             flex-wrap: wrap;
             align-content: center;
             justify-content: center;
-            padding: 55px 10px 10px 10px;
+            padding: 10px;
             box-sizing: border-box;
             gap: 8px;
             overflow: hidden;
         }
 
         .letra-solta {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             font-weight: bold;
             color: var(--azul-petroleo);
             opacity: 0;
@@ -222,8 +244,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width: 45px;
-            min-height: 55px;
+            min-width: 42px;
+            min-height: 52px;
         }
 
         .letra-solta:hover {
@@ -231,17 +253,17 @@
         }
 
         .letra-solta.letra-pequena {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             padding: 5px 9px;
-            min-width: 36px;
-            min-height: 45px;
+            min-width: 34px;
+            min-height: 42px;
         }
 
         .letra-solta.letra-muito-pequena {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             padding: 4px 6px;
-            min-width: 28px;
-            min-height: 36px;
+            min-width: 26px;
+            min-height: 34px;
         }
 
         .movendo-para-caixa {
@@ -266,19 +288,35 @@
             75% { transform: translateX(-6px); }
         }
 
-        /* PAINEL INFERIOR */
+        /* ===== PAINEL INFERIOR (RODAPÉ ORGANIZADO EM DUAS LINHAS) ===== */
         #painel-inferior {
             background-color: var(--azul-petroleo);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            padding: 10px;
+            justify-content: center;
+            padding: 10px 12px;
             gap: 8px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
             z-index: 10;
             flex-shrink: 0;
             width: 100%;
-            flex-wrap: wrap;
+        }
+
+        .painel-linha-principal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .painel-linha-botoes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
         }
 
         .btn-controle {
@@ -286,12 +324,11 @@
             color: var(--fundo-cards);
             border: none;
             border-radius: 8px;
-            padding: 10px 14px;
+            padding: 8px 16px;
             font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             transition: transform 0.2s, background-color 0.2s;
-            flex-shrink: 0;
         }
 
         .btn-controle:hover {
@@ -304,10 +341,10 @@
 
         /* CONTAINER DE IMAGEM */
         #container-imagem {
-            width: 125px;
-            height: 125px;
+            width: 95px;
+            height: 95px;
             background-color: var(--fundo-cards);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -319,51 +356,50 @@
         #container-imagem img {
             max-width: 95%;
             max-height: 95%;
-            border-radius: 8px;
+            border-radius: 6px;
             object-fit: contain;
         }
 
         .imagem-oculta {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             color: var(--azul-petroleo);
         }
 
-        /* ÁREA DA PALAVRA COM QUEBRA AUTOMÁTICA E VISIBILIDADE INTEGRAL */
+        /* ÁREA DA PALAVRA COM QUEBRA FLEXÍVEL */
         #area-palavra {
             display: flex;
-            gap: 5px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            max-width: 100%;
-            padding: 4px;
+            max-width: calc(100vw - 130px);
         }
 
         .espaco-letra {
-            width: 42px;
-            height: 55px;
+            width: 36px;
+            height: 48px;
             background-color: rgba(255, 255, 255, 0.2);
             border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--fundo-cards);
             flex-shrink: 0;
         }
 
         .espaco-letra.espaco-pequeno {
-            width: 34px;
-            height: 45px;
-            font-size: 1.5rem;
+            width: 30px;
+            height: 40px;
+            font-size: 1.3rem;
         }
 
         .espaco-letra.espaco-muito-pequeno {
-            width: 27px;
-            height: 38px;
-            font-size: 1.1rem;
+            width: 24px;
+            height: 34px;
+            font-size: 1rem;
         }
 
         .espaco-preenchido {
@@ -375,11 +411,11 @@
         #campo-ditado {
             display: none;
             width: 100%;
-            max-width: 350px;
-            padding: 10px;
-            font-size: 1.4rem;
+            max-width: 320px;
+            padding: 8px;
+            font-size: 1.3rem;
             border: 3px solid var(--verde-esmeralda);
-            border-radius: 12px;
+            border-radius: 10px;
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
@@ -490,27 +526,11 @@
         .btn-recomecar { background-color: var(--verde-esmeralda); }
         .btn-sair { background-color: var(--vermelho-erro); }
 
-        /* Indicador de progresso */
-        #indicador-progresso {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--azul-petroleo);
-            color: var(--fundo-cards);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            z-index: 100;
-            border: 1px solid var(--verde-esmeralda);
-        }
-
         /* Teclado virtual */
         #teclado-virtual {
             display: none;
             position: fixed;
-            bottom: 140px;
+            bottom: 160px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(29, 53, 87, 0.95);
@@ -524,12 +544,12 @@
         }
 
         .tecla-virtual {
-            width: 30px;
-            height: 38px;
+            width: 28px;
+            height: 36px;
             background-color: var(--fundo-cards);
             border: 1px solid var(--verde-esmeralda);
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: bold;
             color: var(--azul-petroleo);
             display: flex;
@@ -590,34 +610,36 @@
             .btn-modo .modo-desc { font-size: 0.95rem; }
             .btn-modo .modo-emoji { font-size: 2.5rem; }
             
-            #container-imagem { width: 180px; height: 180px; }
+            #container-imagem { width: 170px; height: 170px; }
             .imagem-oculta { font-size: 5rem; }
             
-            #painel-inferior { min-height: 220px; padding: 0 20px; }
-            .btn-controle { padding: 15px 20px; font-size: 1.2rem; }
+            #painel-inferior { padding: 15px 25px; gap: 12px; }
+            .btn-controle { padding: 12px 22px; font-size: 1.1rem; }
+            .painel-linha-botoes { max-width: 700px; }
             
-            .espaco-letra { width: 60px; height: 80px; font-size: 3rem; }
-            .espaco-letra.espaco-pequeno { width: 45px; height: 65px; font-size: 2.2rem; }
-            .espaco-letra.espaco-muito-pequeno { width: 35px; height: 50px; font-size: 1.6rem; }
+            .espaco-letra { width: 55px; height: 75px; font-size: 2.8rem; }
+            .espaco-letra.espaco-pequeno { width: 42px; height: 60px; font-size: 2rem; }
+            .espaco-letra.espaco-muito-pequeno { width: 32px; height: 46px; font-size: 1.5rem; }
             
             .letra-solta { font-size: 3.5rem; min-width: 55px; min-height: 75px; padding: 8px 16px; }
             .letra-solta.letra-pequena { font-size: 2.3rem; min-width: 40px; min-height: 55px; }
             .letra-solta.letra-muito-pequena { font-size: 1.6rem; min-width: 30px; min-height: 45px; }
             
-            #btn-tela-cheia { top: 15px; right: 80px; padding: 10px 15px; font-size: 1rem; }
-            #btn-musica { top: 15px; right: 15px; width: 50px; height: 50px; font-size: 1.5rem; }
-            #btn-voltar-menu { top: 15px; left: 15px; padding: 10px 20px; font-size: 1rem; }
-            #indicador-progresso { top: 15px; font-size: 1rem; padding: 8px 20px; }
+            #btn-tela-cheia-menu { top: 15px; right: 20px; padding: 10px 15px; font-size: 1rem; }
+            #topo-jogo { padding: 12px 20px; }
+            #btn-musica { width: 45px; height: 45px; font-size: 1.3rem; }
+            #btn-voltar-menu, #btn-tela-cheia-topo { padding: 8px 16px; font-size: 1rem; }
+            #indicador-progresso { font-size: 1rem; padding: 6px 18px; }
             
-            #teclado-virtual { bottom: 250px; }
-            .tecla-virtual { width: 40px; height: 50px; font-size: 1.3rem; }
+            #teclado-virtual { bottom: 230px; }
+            .tecla-virtual { width: 38px; height: 48px; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== BOTÃO GLOBAL DE TELA CHEIA ===== -->
-    <button id="btn-tela-cheia" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+    <!-- ===== BOTÃO GLOBAL DE TELA CHEIA (MENU) ===== -->
+    <button id="btn-tela-cheia-menu" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
 
     <!-- ===== MENU INICIAL ===== -->
     <div id="tela-menu">
@@ -647,26 +669,37 @@
 
     <!-- ===== TELA DE JOGO ===== -->
     <div id="tela-jogo">
-        <button id="btn-musica" onclick="alternarMusica()">🎵</button>
-        <button id="btn-voltar-menu" onclick="voltarAoMenu()">🏠 Menu</button>
-        <div id="indicador-progresso">Palavra 1 de 108</div>
+        <!-- CABEÇALHO SUPERIOR ORGANIZADO EM FLEXBOX -->
+        <div id="topo-jogo">
+            <button id="btn-voltar-menu" onclick="voltarAoMenu()">🏠 Menu</button>
+            <div id="indicador-progresso">Palavra 1 de 108</div>
+            <div class="topo-botoes-direita">
+                <button id="btn-musica" onclick="alternarMusica()">🎵</button>
+                <button id="btn-tela-cheia-topo" onclick="toggleFullscreen()">⛶</button>
+            </div>
+        </div>
 
         <div id="area-letras"></div>
 
+        <!-- PAINEL INFERIOR COM DUAS LINHAS (IMAGEM/PALAVRA EM CIMA E BOTÕES EMBAIXO) -->
         <div id="painel-inferior">
-            <button class="btn-controle" onclick="voltarFaseBotao()">◀ Voltar</button>
+            <div class="painel-linha-principal">
+                <div id="container-imagem">
+                    <img src="" alt="Imagem do desafio" id="imagem-desafio">
+                    <div class="imagem-oculta" id="imagem-oculta" style="display:none">❓</div>
+                </div>
 
-            <div id="container-imagem">
-                <img src="" alt="Imagem do desafio" id="imagem-desafio">
-                <div class="imagem-oculta" id="imagem-oculta" style="display:none">❓</div>
+                <div id="area-palavra"></div>
+                <input type="text" id="campo-ditado" placeholder="Digite a palavra aqui..." maxlength="30">
             </div>
 
-            <div id="area-palavra"></div>
-            <input type="text" id="campo-ditado" placeholder="Digite a palavra aqui..." maxlength="30">
-
-            <button class="btn-controle" onclick="avancarFaseBotao()">Avançar ▶</button>
+            <div class="painel-linha-botoes">
+                <button class="btn-controle" onclick="voltarFaseBotao()">◀ Voltar</button>
+                <button class="btn-controle" onclick="avancarFaseBotao()">Avançar ▶</button>
+            </div>
         </div>
 
+        <!-- Teclado virtual para modo ditado -->
         <div id="teclado-virtual"></div>
     </div>
 
