@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edhumanas - Alfabetização</title>
+    <title>FORMANDO PALAVRAS - Alfabetização</title>
     <style>
         :root {
             --azul-piscina: #E0F4F5;
@@ -18,7 +18,7 @@
 
         /* ===== NOVO CURSOR E ESTILOS DOS BOTÕES SOLICITADOS ===== */
         * {
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'><path transform='scale(1.8) translate(3,3)' fill='%23FFFFFF' stroke='%23000000' stroke-width='1.2' stroke-linejoin='round' d='M9 11.24V7.5a2.5 2.5 0 0 1 5 0v5.5l1.76-1.5a2.12 2.12 0 0 1 2.94.13l.16.17a2.12 2.12 0 0 1 .15 2.85L14.28 20.8A4.5 4.5 0 0 1 11 22H9.5a4.5 4.5 0 0 1-4.5-4.5v-6.38l2.06-1.03a2.5 2.5 0 0 1 1.94-.15z'/></svg>") 20 15, auto !important;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='45' height='45' viewBox='0 0 24 24'><path fill='%23FFD700' stroke='%23333333' stroke-width='1.2' stroke-linejoin='round' d='M9.5,10V4.5a2,2,0,0,1,4,0V9h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5v5.5c0,3.5-2.5,6.5-6,6.5h-3c-2.5,0-5-2-6-4.5L2.5,15.5a1.2,1.2,0,0,1,1.7-1.8L7.5,16V10Z'/></svg>") 12 2, pointer !important;
         }
 
         #btn-tela-cheia {
@@ -192,25 +192,28 @@
             background-color: var(--vermelho-erro);
         }
 
+        /* ===== AJUSTE DA ÁREA DE LETRAS (CENTRALIZAÇÃO E ESPAÇO NO TOPO) ===== */
         #area-letras {
             flex: 1;
             position: relative;
             width: 100%;
             display: flex;
             flex-wrap: wrap;
-            align-content: flex-start;
+            align-content: center;
             justify-content: center;
-            padding: 20px;
+            padding: 90px 20px 20px 20px;
             box-sizing: border-box;
-            gap: 12px;
+            gap: 15px;
             overflow-y: auto;
         }
 
+        /* ===== AJUSTE DA LETRA PARA A ANIMAÇÃO EM CASCATA ===== */
         .letra-solta {
             font-size: 4rem;
             font-weight: bold;
             color: var(--azul-petroleo);
-            animation: cair 1s ease-out forwards;
+            opacity: 0;
+            animation: cair 0.6s ease-out forwards;
             background-color: var(--fundo-cards);
             border-radius: 15px;
             padding: 10px 20px;
@@ -591,7 +594,7 @@
         <!-- ===== BOTÃO DE VOLTAR PARA A PÁGINA ANTERIOR ===== -->
         <button id="btn-voltar-pagina" onclick="window.location.href='https://letramento-vogais.vercel.app/consoantes.html'">⬅ Voltar para Consoantes</button>
 
-        <div class="titulo-menu">🌟 edhumanas 🌟</div>
+        <div class="titulo-menu">🌟 FORMANDO PALAVRAS 🌟</div>
         <div class="subtitulo-menu">Vamos formar palavras e aprender brincando!</div>
 
         <button class="btn-modo" id="btn-modo1" onclick="iniciarModo(1)">
@@ -731,7 +734,6 @@
             { palavra: "LONA", imagem: "lona.png" },
             { palavra: "MESA", imagem: "mesa.png" },
             { palavra: "JACA", imagem: "jaca.png" },
-            { palavra: "JUTA", imagem: "juta.png" },
             { palavra: "MINA", imagem: "mina.png" },
             { palavra: "LAMA", imagem: "lama.png" },
             { palavra: "NABO", imagem: "nabo.png" },
@@ -974,17 +976,20 @@
             }
         }
 
-        // ===== ESPALHAR LETRAS COM TAMANHO ADAPTÁVEL =====
+        // ===== ESPALHAR LETRAS COM EFEITO DE QUEDA EM CASCATA =====
         function espalharLetras() {
             const letrasEmbaralhadas = palavraAlvo.split('').sort(() => 0.5 - Math.random());
             const tamanhoPalavra = palavraAlvo.length;
 
             tocarAudio('audio-entrada');
 
-            letrasEmbaralhadas.forEach((letra) => {
+            letrasEmbaralhadas.forEach((letra, index) => {
                 const elLetra = document.createElement('div');
                 elLetra.innerText = letra;
                 elLetra.classList.add('letra-solta');
+                
+                /* EFEITO DE CASCATA: Cada letra cai com um leve atraso */
+                elLetra.style.animationDelay = `${index * 0.1}s`;
 
                 if (tamanhoPalavra > 10) {
                     elLetra.classList.add('letra-muito-pequena');
@@ -996,11 +1001,6 @@
                     elLetra.style.position = 'relative';
                     elLetra.style.left = 'auto';
                     elLetra.style.top = 'auto';
-                } else {
-                    const posX = Math.random() * 80 + 10;
-                    const posY = Math.random() * 60 + 10;
-                    elLetra.style.left = `${posX}%`;
-                    elLetra.style.top = `${posY}%`;
                 }
 
                 elLetra.onclick = () => processarCliqueLetra(letra, elLetra);
