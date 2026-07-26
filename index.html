@@ -6,6 +6,8 @@
     <title>FORMANDO PALAVRAS - Alfabetização</title>
     <style>
         :root {
+            --fundo-pagina: #E3F2FD; /* Nova cor de fundo para distinguir as páginas */
+            --borda-card: #FFB74D; /* Laranja da borda principal */
             --azul-piscina: #E0F4F5;
             --azul-petroleo: #1D3557;
             --verde-esmeralda: #2A9D8F;
@@ -14,189 +16,191 @@
             --amarelo-dourado: #F4A261;
             --laranja-claro: #E76F51;
             --roxo-magico: #9B5DE5;
+            --azul-titulo: #00A8E8;
+            --rosa-subtitulo: #FF4081;
         }
 
-        /* ===== CURSOR, ESTILOS GLOBAIS E REMOÇÃO DO PISCAR AO TOCAR ===== */
+        /* ===== CURSOR E ESTILOS GLOBAIS ===== */
         * {
             cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='45' height='45' viewBox='0 0 24 24'><path fill='%23FFD700' stroke='%23333333' stroke-width='1.2' stroke-linejoin='round' d='M9.5,10V4.5a2,2,0,0,1,4,0V9h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5h.5a2,2,0,0,1,1.5.5v5.5c0,3.5-2.5,6.5-6,6.5h-3c-2.5,0-5-2-6-4.5L2.5,15.5a1.2,1.2,0,0,1,1.7-1.8L7.5,16V10Z'/></svg>") 12 2, pointer !important;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Remove o flash/seleção ao tocar no celular */
-            -webkit-touch-callout: none; /* Evita menu de contexto indesejado ao segurar o dedo */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--azul-piscina);
+            background-color: var(--fundo-pagina);
             display: flex;
             flex-direction: column;
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
+            overflow: hidden; /* Controlado pelas telas individuais */
             user-select: none;
         }
 
-        /* ===== ESTILO DO BOTÃO DOURADO DE VOLTAR ===== */
-        .btn-dourado-voltar {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100000; /* Fica por cima de tudo */
-            display: inline-block;
-            background: linear-gradient(135deg, #FFD700, #DAA520);
-            color: #333333;
-            text-decoration: none;
-            padding: 10px 20px;
-            font-family: 'Arial', sans-serif;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 1px solid #B8860B;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .btn-dourado-voltar:hover {
-            background: linear-gradient(135deg, #F8C300, #C59318);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-            color: #000000;
-        }
-
-        /* ===== CABEÇALHO DO MENU ===== */
-        #topo-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            background-color: var(--azul-petroleo);
-            padding: 10px 15px;
-            box-sizing: border-box;
-            flex-shrink: 0;
-            z-index: 10000;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-        }
-
-        #btn-voltar-pagina {
-            background-color: var(--roxo-magico);
-            color: var(--fundo-cards);
-            border: 2px solid var(--fundo-cards);
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        #btn-voltar-pagina:hover {
-            background-color: var(--vermelho-erro);
-            transform: scale(1.05);
-        }
-
-        #btn-tela-cheia-menu {
-            background-color: var(--azul-petroleo);
-            color: var(--fundo-cards);
-            border: 2px solid var(--verde-esmeralda);
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        #btn-tela-cheia-menu:hover {
-            background-color: var(--verde-esmeralda);
-            transform: scale(1.05);
-        }
-
-        /* ===== MENU INICIAL ===== */
+        /* ===== TELA DE MENU (NOVO LAYOUT BASEADO NA IMAGEM) ===== */
         #tela-menu {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: var(--azul-petroleo);
+            background-color: var(--fundo-pagina);
             z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Permite rolar se a tela for pequena */
+            padding: 20px;
+        }
+
+        /* Card Branco Centralizado (Inspirado na imagem) */
+        .menu-container {
+            background-color: var(--fundo-cards);
+            border: 6px solid var(--borda-card);
+            border-radius: 25px;
+            width: 100%;
+            max-width: 950px;
+            margin: 20px auto; /* Centraliza horizontalmente e dá espaço vertical */
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* ===== CABEÇALHO DO MENU (BOTÕES NO TOPO DO CARD) ===== */
+        #topo-menu {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 25px;
+            flex-wrap: wrap; /* Se não couber, joga para a linha de baixo */
+        }
+
+        #btn-voltar-pagina, #btn-tela-cheia-menu {
+            background-color: var(--fundo-cards);
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px; /* Mantendo retangular conforme solicitado */
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.1);
+        }
+
+        #btn-voltar-pagina {
+            border: 3px solid var(--verde-esmeralda);
+            color: var(--verde-esmeralda);
+        }
+        #btn-voltar-pagina:hover {
+            background-color: var(--verde-esmeralda);
+            color: var(--fundo-cards);
+            transform: translateY(-2px);
+        }
+
+        #btn-tela-cheia-menu {
+            border: 3px solid var(--vermelho-erro);
+            color: var(--vermelho-erro);
+        }
+        #btn-tela-cheia-menu:hover {
+            background-color: var(--vermelho-erro);
+            color: var(--fundo-cards);
+            transform: translateY(-2px);
+        }
+
+        /* ===== TEXTOS DO MENU ===== */
+        .titulo-menu {
+            font-size: 2.5rem;
+            color: var(--azul-titulo);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+        }
+
+        .subtitulo-menu {
+            font-size: 1.3rem;
+            color: var(--rosa-subtitulo);
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ===== GRADE DE BOTÕES (MODOS DE JOGO) ===== */
+        .modos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .btn-modo {
+            width: 260px;
+            height: 250px;
+            padding: 20px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 15px;
-            padding: 60px 20px 20px 20px;
-            overflow-y: auto;
-        }
-
-        .titulo-menu {
-            font-size: 2.2rem;
-            color: var(--fundo-cards);
-            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
             text-align: center;
-            text-shadow: 0 0 15px var(--verde-esmeralda);
-            margin-bottom: 5px;
-        }
-
-        .subtitulo-menu {
-            font-size: 1rem;
-            color: var(--amarelo-dourado);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .btn-modo {
-            width: 100%;
-            max-width: 420px;
-            padding: 14px 18px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: var(--fundo-cards);
         }
 
         .btn-modo:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-
-        .btn-modo .modo-nome {
-            font-size: 1.2rem;
-        }
-
-        .btn-modo .modo-desc {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            font-weight: normal;
-            text-align: center;
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
         .btn-modo .modo-emoji {
-            font-size: 1.6rem;
+            font-size: 4.5rem;
         }
 
-        #btn-modo1 { background-color: var(--verde-esmeralda); }
-        #btn-modo2 { background-color: var(--amarelo-dourado); }
-        #btn-modo3 { background-color: var(--roxo-magico); }
+        .btn-modo .modo-nome {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-        /* ===== TELA DE JOGO ===== */
+        .btn-modo .modo-desc {
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* Estilos Individuais dos Modos inspirados na imagem */
+        #btn-modo1 { 
+            border: 4px solid var(--vermelho-erro); 
+            background-color: #FFF0F2; 
+            color: var(--vermelho-erro); 
+        }
+        #btn-modo2 { 
+            border: 4px solid #2196F3; 
+            background-color: #E3F2FD; 
+            color: #1976D2; 
+        }
+        #btn-modo3 { 
+            border: 4px solid var(--verde-esmeralda); 
+            background-color: #E8F5E9; 
+            color: var(--verde-esmeralda); 
+        }
+
+
+        /* ===== TELA DE JOGO (MANTIDA ORIGINAL, MAS GARANTINDO O TOPO) ===== */
         #tela-jogo {
             display: none;
             flex-direction: column;
             height: 100vh;
             width: 100vw;
+            background-color: var(--azul-piscina);
             overflow: hidden;
         }
 
-        /* CABEÇALHO DO JOGO */
         #topo-jogo {
             display: flex;
             justify-content: space-between;
@@ -341,14 +345,7 @@
             width: 100%;
         }
 
-        .painel-linha-imagem {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .painel-linha-palavra {
+        .painel-linha-imagem, .painel-linha-palavra {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -434,24 +431,10 @@
             flex-shrink: 0;
         }
 
-        .espaco-letra.espaco-pequeno {
-            width: 30px;
-            height: 40px;
-            font-size: 1.3rem;
-        }
+        .espaco-letra.espaco-pequeno { width: 30px; height: 40px; font-size: 1.3rem; }
+        .espaco-letra.espaco-muito-pequeno { width: 24px; height: 34px; font-size: 1rem; }
+        .espaco-preenchido { background-color: var(--verde-esmeralda); border: 2px solid var(--fundo-cards); }
 
-        .espaco-letra.espaco-muito-pequeno {
-            width: 24px;
-            height: 34px;
-            font-size: 1rem;
-        }
-
-        .espaco-preenchido {
-            background-color: var(--verde-esmeralda);
-            border: 2px solid var(--fundo-cards);
-        }
-
-        /* Campo de digitação para Modo Ditado */
         #campo-ditado {
             display: none;
             width: 100%;
@@ -467,110 +450,51 @@
             outline: none;
         }
 
-        #campo-ditado::placeholder {
-            color: #aaa;
-            text-transform: none;
-        }
+        #campo-ditado::placeholder { color: #aaa; text-transform: none; }
 
-        /* TELA DE FOGOS */
-        #tela-fogos {
+        /* TELAS FINAIS E TECLADO */
+        #tela-fogos, #tela-fim-jogo {
             display: none;
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(29, 53, 87, 0.95);
             z-index: 9999;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #tela-fogos {
+            background-color: rgba(29, 53, 87, 0.95);
             opacity: 0;
             transition: opacity 0.5s;
-            padding: 20px;
-            text-align: center;
         }
 
-        #tela-fogos.ativo {
-            display: flex;
-            opacity: 1;
+        #tela-fogos.ativo, #tela-fim-jogo.ativo { display: flex; }
+        #tela-fogos.ativo { opacity: 1; }
+
+        #tela-fim-jogo {
+            background-color: rgba(29, 53, 87, 0.97);
+            gap: 20px;
         }
 
-        .fogos-emojis {
-            font-size: 4rem;
-            animation: pular 0.8s infinite alternate;
-        }
-
-        .texto-parabens {
-            font-size: 2rem;
-            color: var(--fundo-cards);
-            font-weight: bold;
-            margin-top: 15px;
-            text-shadow: 0 0 15px var(--verde-esmeralda);
-        }
+        .fogos-emojis { font-size: 4rem; animation: pular 0.8s infinite alternate; }
+        .texto-parabens { font-size: 2rem; color: var(--fundo-cards); font-weight: bold; margin-top: 15px; text-shadow: 0 0 15px var(--verde-esmeralda); }
+        
+        .texto-fim { font-size: 2.2rem; color: var(--fundo-cards); font-weight: bold; text-shadow: 0 0 15px var(--amarelo-dourado); }
+        .texto-fim-sub { font-size: 1rem; color: var(--amarelo-dourado); max-width: 500px; line-height: 1.4; }
+        .botoes-fim { display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+        .btn-fim { padding: 14px 24px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 12px; transition: transform 0.2s; color: var(--fundo-cards); }
+        .btn-fim:hover { transform: scale(1.05); }
+        .btn-recomecar { background-color: var(--verde-esmeralda); }
+        .btn-sair { background-color: var(--vermelho-erro); }
 
         @keyframes pular {
             from { transform: scale(1) translateY(0); }
             to { transform: scale(1.15) translateY(-10px); }
         }
 
-        /* TELA DE FIM DE JOGO */
-        #tela-fim-jogo {
-            display: none;
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(29, 53, 87, 0.97);
-            z-index: 9999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        #tela-fim-jogo.ativo {
-            display: flex;
-        }
-
-        .texto-fim {
-            font-size: 2.2rem;
-            color: var(--fundo-cards);
-            font-weight: bold;
-            text-shadow: 0 0 15px var(--amarelo-dourado);
-        }
-
-        .texto-fim-sub {
-            font-size: 1rem;
-            color: var(--amarelo-dourado);
-            max-width: 500px;
-            line-height: 1.4;
-        }
-
-        .botoes-fim {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-fim {
-            padding: 14px 24px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            transition: transform 0.2s;
-            color: var(--fundo-cards);
-        }
-
-        .btn-fim:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-recomecar { background-color: var(--verde-esmeralda); }
-        .btn-sair { background-color: var(--vermelho-erro); }
-
-        /* Teclado virtual */
         #teclado-virtual {
             display: none;
             position: fixed;
@@ -602,57 +526,20 @@
             transition: transform 0.1s, background-color 0.2s;
         }
 
-        .tecla-virtual:active {
-            transform: scale(0.95);
-            background-color: var(--verde-esmeralda);
-            color: var(--fundo-cards);
-        }
+        .tecla-virtual:active { transform: scale(0.95); background-color: var(--verde-esmeralda); color: var(--fundo-cards); }
+        .tecla-virtual.tecla-especial { width: auto; padding: 0 10px; background-color: var(--vermelho-erro); color: var(--fundo-cards); border-color: var(--vermelho-erro); }
 
-        .tecla-virtual.tecla-especial {
-            width: auto;
-            padding: 0 10px;
-            background-color: var(--vermelho-erro);
-            color: var(--fundo-cards);
-            border-color: var(--vermelho-erro);
-        }
+        .letra-descendo { position: absolute; font-size: 2rem; font-weight: bold; color: var(--verde-esmeralda); animation: descerLetra 1s ease-out forwards; z-index: 1000; pointer-events: none; }
+        @keyframes descerLetra { from { opacity: 1; transform: translateY(-30px) scale(1.3); } to { opacity: 0; transform: translateY(80px) scale(1); } }
 
-        /* Animações */
-        .letra-descendo {
-            position: absolute;
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--verde-esmeralda);
-            animation: descerLetra 1s ease-out forwards;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        @keyframes descerLetra {
-            from { opacity: 1; transform: translateY(-30px) scale(1.3); }
-            to { opacity: 0; transform: translateY(80px) scale(1); }
-        }
-
-        .estrela-flutuante {
-            position: absolute;
-            font-size: 1.5rem;
-            animation: flutuar 2s ease-out forwards;
-            pointer-events: none;
-            z-index: 2000;
-        }
-
-        @keyframes flutuar {
-            0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
-            100% { opacity: 0; transform: translateY(-150px) scale(1.3) rotate(360deg); }
-        }
+        .estrela-flutuante { position: absolute; font-size: 1.5rem; animation: flutuar 2s ease-out forwards; pointer-events: none; z-index: 2000; }
+        @keyframes flutuar { 0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); } 100% { opacity: 0; transform: translateY(-150px) scale(1.3) rotate(360deg); } }
 
         /* ===== AJUSTES DESKTOP ===== */
         @media (min-width: 768px) {
-            .titulo-menu { font-size: 4rem; }
-            .subtitulo-menu { font-size: 1.6rem; margin-bottom: 20px; }
-            .btn-modo { width: 480px; padding: 20px 25px; font-size: 1.5rem; }
-            .btn-modo .modo-nome { font-size: 1.7rem; }
-            .btn-modo .modo-desc { font-size: 0.95rem; }
-            .btn-modo .modo-emoji { font-size: 2.5rem; }
+            .titulo-menu { font-size: 3.5rem; margin-top: 10px; }
+            .subtitulo-menu { font-size: 1.5rem; margin-bottom: 50px; }
+            .menu-container { padding: 40px; margin: 40px auto; }
             
             #container-imagem { width: 190px; height: 190px; }
             .imagem-oculta { font-size: 5rem; }
@@ -669,10 +556,9 @@
             .letra-solta.letra-pequena { font-size: 2.3rem; min-width: 40px; min-height: 55px; }
             .letra-solta.letra-muito-pequena { font-size: 1.6rem; min-width: 30px; min-height: 45px; }
             
-            #topo-menu { padding: 12px 20px; }
             #topo-jogo { padding: 12px 20px; }
             #btn-musica { width: 45px; height: 45px; font-size: 1.3rem; }
-            #btn-voltar-menu, #btn-tela-cheia-topo, #btn-tela-cheia-menu { padding: 8px 16px; font-size: 1rem; }
+            #btn-voltar-menu, #btn-tela-cheia-topo { padding: 8px 16px; font-size: 1rem; }
             #indicador-progresso { font-size: 1rem; padding: 6px 18px; }
             
             #teclado-virtual { bottom: 260px; }
@@ -682,44 +568,46 @@
 </head>
 <body>
 
-    <!-- Botão Dourado Adicionado Aqui -->
-    <a href="https://letramento-vogais.vercel.app/consoantes.html" class="btn-dourado-voltar">
-        &#8592; Voltar para a página inicial
-    </a>
-
-    <!-- ===== MENU INICIAL ===== -->
+    <!-- ===== TELA DE MENU INICIAL ===== -->
     <div id="tela-menu">
-        <div id="topo-menu">
-            <a id="btn-voltar-pagina" href="https://letramento-vogais.vercel.app/consoantes.html">⬅ Voltar para Consoantes</a>
-            <button id="btn-tela-cheia-menu" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+        <div class="menu-container">
+            <!-- Botões retangulares alinhados no topo do card -->
+            <div id="topo-menu">
+                <a id="btn-voltar-pagina" href="https://letramento-vogais.vercel.app/consoantes.html">⬅ Voltar para Consoantes</a>
+                <button id="btn-tela-cheia-menu" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+            </div>
+
+            <!-- Títulos -->
+            <div class="titulo-menu">🌟 FORMANDO PALAVRAS 🌟</div>
+            <div class="subtitulo-menu">Escolha sua diversão ortográfica!</div>
+
+            <!-- Botões de Modo formatados como uma Grade -->
+            <div class="modos-grid">
+                <div class="btn-modo" id="btn-modo1" onclick="iniciarModo(1)">
+                    <span class="modo-emoji">🎨</span>
+                    <span class="modo-nome">Montando Palavras</span>
+                    <span class="modo-desc">Veja a imagem e clique nas letras para formar.</span>
+                </div>
+
+                <div class="btn-modo" id="btn-modo2" onclick="iniciarModo(2)">
+                    <span class="modo-emoji">🎁</span>
+                    <span class="modo-nome">Adivinhe a Surpresa</span>
+                    <span class="modo-desc">Forme a palavra e descubra o que está escondido!</span>
+                </div>
+
+                <div class="btn-modo" id="btn-modo3" onclick="iniciarModo(3)">
+                    <span class="modo-emoji">🎤</span>
+                    <span class="modo-nome">Ouvindo e Escrevendo</span>
+                    <span class="modo-desc">Ouça a palavra e digite as letras corretas.</span>
+                </div>
+            </div>
         </div>
-
-        <div class="titulo-menu">🌟 FORMANDO PALAVRAS 🌟</div>
-        <div class="subtitulo-menu">Vamos formar palavras e aprender brincando!</div>
-
-        <button class="btn-modo" id="btn-modo1" onclick="iniciarModo(1)">
-            <span class="modo-emoji">🎨</span>
-            <span class="modo-nome">Montando Palavras</span>
-            <span class="modo-desc">Veja a imagem e clique nas letras para formar a palavra</span>
-        </button>
-
-        <button class="btn-modo" id="btn-modo2" onclick="iniciarModo(2)">
-            <span class="modo-emoji">🎁</span>
-            <span class="modo-nome">Adivinhe a Surpresa</span>
-            <span class="modo-desc">Forme a palavra e descubra qual imagem está escondida!</span>
-        </button>
-
-        <button class="btn-modo" id="btn-modo3" onclick="iniciarModo(3)">
-            <span class="modo-emoji">🎤</span>
-            <span class="modo-nome">Ouvindo e Escrevendo</span>
-            <span class="modo-desc">Ouça a palavra e digite as letras que você ouviu</span>
-        </button>
     </div>
 
     <!-- ===== TELA DE JOGO ===== -->
     <div id="tela-jogo">
         <div id="topo-jogo">
-            <button id="btn-voltar-menu" onclick="voltarAoMenu()">🏠 Menu</button>
+            <button id="btn-voltar-menu" onclick="voltarAoMenu()">🏠 Voltar</button>
             <div id="indicador-progresso">Palavra 1 de 108</div>
             <div class="topo-botoes-direita">
                 <button id="btn-musica" onclick="alternarMusica()">🎵</button>
@@ -751,13 +639,12 @@
         <div id="teclado-virtual"></div>
     </div>
 
-    <!-- Tela de comemoração a cada 10 palavras -->
+    <!-- ===== TELAS FINAIS ===== -->
     <div id="tela-fogos">
         <div class="fogos-emojis">🎆 🎉 ✨ 🎇 👏</div>
         <div class="texto-parabens">SENSACIONAL!<br>Você completou 10 palavras!</div>
     </div>
 
-    <!-- Tela de fim de jogo -->
     <div id="tela-fim-jogo">
         <div class="fogos-emojis">🏆 🎉 🌟 🎊 👑</div>
         <div class="texto-fim">PARABÉNS, CAMPEÃO!</div>
