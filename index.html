@@ -24,7 +24,40 @@
             -webkit-touch-callout: none; /* Evita menu de contexto indesejado ao segurar o dedo */
         }
 
-        body {
+        body
+        <!-- Botão de Voltar -->
+<a href="https://letramento-vogais.vercel.app/consoantes.html" class="btn-dourado-voltar">
+    &#8592; Voltar para a página inicial
+</a>
+
+<!-- Estilos do Botão -->
+<style>
+    .btn-dourado-voltar {
+        display: inline-block;
+        background: linear-gradient(135deg, #FFD700, #DAA520); /* Gradiente dourado */
+        color: #333333; /* Texto escuro para facilitar a leitura */
+        text-decoration: none;
+        padding: 12px 24px;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        border: 1px solid #B8860B;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px; /* Dá um espaço das bordas da página */
+        transition: all 0.3s ease;
+    }
+
+    /* Efeito ao passar o mouse por cima */
+    .btn-dourado-voltar:hover {
+        background: linear-gradient(135deg, #F8C300, #C59318);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px); /* Efeito de elevação */
+        color: #000000;
+    }
+</style>
+        
+        {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
