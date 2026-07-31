@@ -827,6 +827,7 @@
         let modoAtual = 1;
         let imagemRevelada = false;
         let teclasDigitadas = "";
+        let palavraFinalizada = false;
 
         const areaLetras = document.getElementById('area-letras');
         const areaPalavra = document.getElementById('area-palavra');
@@ -899,6 +900,7 @@
             interagindo = false;
             imagemRevelada = false;
             teclasDigitadas = "";
+            palavraFinalizada = false;
 
             window.speechSynthesis.cancel();
 
@@ -1122,25 +1124,17 @@
             
             espacos.forEach((espaco, index) => {
                 setTimeout(() => {
-                    // Adiciona a classe de magia em cada letra com um pequeno delay
                     espaco.classList.add('magia-ativa');
-                    
-                    // Cria partículas mágicas
                     criarParticulasMagicas(espaco);
-                    
-                    // Cria estrelas explosivas
                     criarEstrelasExplosivas(espaco);
-                    
                 }, index * 200);
             });
 
-            // Efeito de "estouro" final em todas as letras
             setTimeout(() => {
                 espacos.forEach((espaco) => {
                     espaco.classList.remove('magia-ativa');
                     espaco.classList.add('estourando');
                     
-                    // Remove a classe estourando após a animação
                     setTimeout(() => {
                         espaco.classList.remove('estourando');
                         espaco.classList.add('brilhando');
@@ -1246,21 +1240,26 @@
             }, 800);
         }
 
+        // ===== FUNÇÃO PRINCIPAL DE FINALIZAÇÃO COM SEQUÊNCIA CORRETA =====
         function finalizarPalavra() {
+            if (palavraFinalizada) return; // Evita execução duplicada
+            palavraFinalizada = true;
             interagindo = true;
             palavrasConcluidas++;
 
-            // ATIVA O EFEITO MÁGICO NAS LETRAS
+            // PASSO 1: ATIVA O EFEITO MÁGICO NAS LETRAS
             ativarEfeitoMagico();
 
-            // Toca o som de palavra formada ANTES da pronúncia
+            // PASSO 2: TOCA O SOM "palavra_formada.mp3" DURANTE O EFEITO
             tocarAudio('audio-palavra-formada');
 
-            // Fala a palavra completa após o som e os efeitos
+            // PASSO 3: APÓS O EFEITO E O SOM, PRONUNCIA A PALAVRA
+            // Aguarda o tempo total do efeito mágico (1.2s) + um pequeno delay
             setTimeout(() => {
                 falarTexto(palavraAlvo);
-            }, 800);
+            }, 1500); // 1.5 segundos para garantir que o som e o efeito já estejam em andamento
 
+            // PASSO 4: REVELA A IMAGEM NO MODO 2 (se aplicável)
             if (modoAtual === 2 && !imagemRevelada) {
                 setTimeout(() => {
                     imagemOculta.style.display = 'none';
@@ -1272,6 +1271,7 @@
                 }, 1500);
             }
 
+            // PASSO 5: VERIFICA SE É O FIM DO JOGO OU PROGRESSO
             if (indiceFaseAtual >= fases.length - 1) {
                 setTimeout(() => {
                     tocarAudio('audio-palmas-alegria');
