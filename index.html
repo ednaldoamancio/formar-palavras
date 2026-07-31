@@ -704,33 +704,12 @@
 
         audioFundo.volume = 0.2;
 
-        /* ===== NOVO SISTEMA HÍBRIDO DE ÁUDIO ===== */
-        // CHAVE DE CONTROLE: Mude para 'true' quando você subir as pastas com os arquivos MP3 gravados.
-        const USAR_VOZES_GRAVADAS = false; 
-
-        function tocarVozTexto(texto, tipo) {
-            // Se estiver falso, ignora os MP3 e chama direto a voz do robô do navegador
-            if (!USAR_VOZES_GRAVADAS) {
-                falarTexto(texto);
-                return;
-            }
-
-            // Normaliza para remover acentos e cedilhas. Ex: "MAÇÃ" vira "maca", "PÁ" vira "pa"
-            const nomeArquivo = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const caminhoAudio = `audios/${tipo}s/${nomeArquivo}.mp3`;
-            const audio = new Audio(caminhoAudio);
-            
-            audio.play().catch(e => {
-                console.log("Arquivo de áudio não encontrado:", caminhoAudio);
-            });
-        }
-
         function falarTexto(texto) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(texto);
                 utterance.lang = 'pt-BR';
-                utterance.rate = 0.9; // Velocidade ajustada para ficar mais natural
+                utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -816,7 +795,7 @@
                 criarTecladoVirtual();
 
                 setTimeout(() => {
-                    tocarVozTexto("Escreva a palavra: " + palavraAlvo, 'frase');
+                    falarTexto("Escreva a palavra: " + palavraAlvo);
                 }, 800);
             } else {
                 areaLetras.style.display = 'flex';
@@ -932,7 +911,7 @@
             espacoAlvo.classList.add('espaco-preenchido');
 
             tocarAudio('audio-estrelinhas');
-            tocarVozTexto(letra, 'letra');
+            falarTexto(letra);
             criarEstrelasFlutuantes();
 
             setTimeout(() => {
@@ -1018,7 +997,7 @@
             }
 
             interagindo = true;
-            tocarVozTexto(letra, 'letra');
+            falarTexto(letra);
 
             const indexAtual = letrasFormadas.length;
             const espacoAlvo = document.getElementById(`espaco-${indexAtual}`);
@@ -1062,7 +1041,7 @@
             palavrasConcluidas++;
 
             setTimeout(() => {
-                tocarVozTexto(palavraAlvo, 'palavra');
+                falarTexto(palavraAlvo);
             }, 500);
 
             if (modoAtual === 2 && !imagemRevelada) {
