@@ -705,15 +705,23 @@
         audioFundo.volume = 0.2;
 
         /* ===== NOVO SISTEMA HÍBRIDO DE ÁUDIO ===== */
+        // CHAVE DE CONTROLE: Mude para 'true' quando você subir as pastas com os arquivos MP3 gravados.
+        const USAR_VOZES_GRAVADAS = false; 
+
         function tocarVozTexto(texto, tipo) {
+            // Se estiver falso, ignora os MP3 e chama direto a voz do robô do navegador
+            if (!USAR_VOZES_GRAVADAS) {
+                falarTexto(texto);
+                return;
+            }
+
             // Normaliza para remover acentos e cedilhas. Ex: "MAÇÃ" vira "maca", "PÁ" vira "pa"
             const nomeArquivo = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const caminhoAudio = `audios/${tipo}s/${nomeArquivo}.mp3`;
             const audio = new Audio(caminhoAudio);
             
             audio.play().catch(e => {
-                // Se der erro (arquivo MP3 não encontrado), usa a voz sintética como fallback
-                falarTexto(texto);
+                console.log("Arquivo de áudio não encontrado:", caminhoAudio);
             });
         }
 
@@ -722,7 +730,7 @@
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(texto);
                 utterance.lang = 'pt-BR';
-                utterance.rate = 0.85;
+                utterance.rate = 0.9; // Velocidade ajustada para ficar mais natural
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -808,7 +816,7 @@
                 criarTecladoVirtual();
 
                 setTimeout(() => {
-                    falarTexto("Escreva a palavra: " + palavraAlvo);
+                    tocarVozTexto("Escreva a palavra: " + palavraAlvo, 'frase');
                 }, 800);
             } else {
                 areaLetras.style.display = 'flex';
