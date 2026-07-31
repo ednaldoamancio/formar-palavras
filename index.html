@@ -680,13 +680,12 @@
     <audio id="audio-erro" src="audios/som_erro.mp3" preload="auto"></audio>
     <audio id="audio-parabens" src="audios/parabens.mp3" preload="auto"></audio>
     <audio id="audio-entrada" src="audios/som_entrada_letras.mp3" preload="auto"></audio>
-    <audio id="audio-estrelinhas" src="audios/som_letra_certa_estrelinhas.mp3" preload="auto"></audio>
     <audio id="audio-palmas-alegria" src="audios/som_palmas_alegria.mp3" preload="auto"></audio>
     <audio id="audio-fundo" src="audios/som_fundo_montar_silabas.mp3" loop preload="auto"></audio>
     <audio id="audio-acerto-estrelinhas" src="audios/acerto_estrelinhas.mp3" preload="auto"></audio>
     
     <!-- ÁUDIO PRINCIPAL COM CONFIGURAÇÕES ESPECIAIS -->
-    <audio id="audio-palavra-formada" src="audios/palavra_formada.mp3" preload="auto" volume="1.0"></audio>
+    <audio id="audio-palavra-formada" src="audios/palavra_formada.mp3" preload="auto"></audio>
 
     <script>
         // ===== FUNÇÃO PARA TOCAR ÁUDIO COM VERIFICAÇÃO =====
@@ -1086,7 +1085,7 @@
             espacoAlvo.innerText = letra;
             espacoAlvo.classList.add('espaco-preenchido');
 
-            tocarAudio('audio-estrelinhas');
+            tocarAudio('audio-acerto-estrelinhas');
             falarTexto(letra);
             criarEstrelasFlutuantes();
 
@@ -1270,7 +1269,7 @@
                 espacoAlvo.innerText = letra;
                 espacoAlvo.classList.add('espaco-preenchido');
 
-                tocarAudio('audio-estrelinhas');
+                tocarAudio('audio-acerto-estrelinhas');
                 criarEstrelasFlutuantes();
 
                 letrasFormadas.push(letra);
@@ -1291,13 +1290,13 @@
 
             console.log("🎉 PALAVRA FORMADA:", palavraAlvo);
 
-            // PASSO 1: ATIVA O EFEITO MÁGICO NAS LETRAS
+            // PASSO 1: ATIVA O EFEITO MÁGICO NAS LETRAS (brilho)
             ativarEfeitoMagico();
 
-            // PASSO 2: TOCA O ÁUDIO "palavra_formada.mp3" (COM FUNÇÃO ESPECIAL)
+            // PASSO 2: TOCA O ÁUDIO "palavra_formada.mp3" JUNTO COM O EFEITO DE BRILHO (1,30s)
             tocarPalavraFormada();
 
-            // PASSO 3: APÓS O ÁUDIO, PRONUNCIA A PALAVRA
+            // PASSO 3: SÓ DEPOIS DO SOM ESPECIAL, PRONUNCIA A PALAVRA
             // Aguarda 1.5 segundos (tempo do áudio de 1.30s + pequeno delay)
             setTimeout(() => {
                 console.log("🔊 Pronunciando palavra:", palavraAlvo);
