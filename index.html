@@ -741,10 +741,13 @@
             // Define volume máximo
             audio.volume = 1.0;
             
-            // Carrega novamente para garantir
-            audio.load();
+            // Só recarrega se ainda não estiver pronto (recarregar sempre pode
+            // cancelar o play() em andamento e o som simplesmente não toca)
+            if (audio.readyState < 2) {
+                audio.load();
+            }
             
-            console.log("Tentando tocar palavra_formada.mp3 (1.30s)");
+            console.log("Tentando tocar palavra_formada.mp3 (1.30s) - src:", audio.src);
             
             // Toca com timeout para garantir
             const promessa = audio.play();
@@ -771,8 +774,18 @@
         function preCarregarAudios() {
             const audios = document.querySelectorAll('audio');
             audios.forEach(audio => {
+                // DIAGNÓSTICO: se o arquivo não existir, tiver nome errado (maiúsculas/
+                // minúsculas) ou estiver em outra pasta, isso aparece bem claro no Console.
+                audio.addEventListener('error', () => {
+                    const codigo = audio.error ? audio.error.code : 'desconhecido';
+                    console.error(
+                        `❌ FALHA AO CARREGAR ÁUDIO "${audio.id}" (arquivo: ${audio.currentSrc || audio.src}). ` +
+                        `Código do erro: ${codigo}. Verifique se o arquivo existe exatamente com esse nome ` +
+                        `(maiúsculas/minúsculas importam!) dentro da pasta "audios/".`
+                    );
+                });
                 audio.load();
-                console.log("Áudio pré-carregado:", audio.id);
+                console.log("Áudio pré-carregado:", audio.id, "->", audio.src);
             });
         }
 
@@ -884,8 +897,24 @@
 
         audioFundo.volume = 0.2;
 
-        // Inicia a música com interação do usuário
+        // Desbloqueia TODOS os áudios no primeiro toque/clique da criança.
+        // Isso é essencial em tablets/iPad: cada elemento <audio> precisa ser
+        // "liberado" individualmente por uma interação, senão ele fica mudo
+        // mesmo quando chamado depois via setTimeout.
         document.body.addEventListener('click', () => {
+            document.querySelectorAll('audio').forEach(audio => {
+                if (audio.id === 'audio-fundo') return; // a música de fundo é tratada abaixo
+                const estadoMudoOriginal = audio.muted;
+                audio.muted = true;
+                audio.play().then(() => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.muted = estadoMudoOriginal;
+                }).catch(() => {
+                    audio.muted = estadoMudoOriginal;
+                });
+            });
+
             if (!musicaIniciada) {
                 audioFundo.play().then(() => {
                     musicaIniciada = true;
