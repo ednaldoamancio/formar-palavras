@@ -747,7 +747,9 @@
     <!-- TEMPORÁRIO: "parabens.mp3" não está entre seus arquivos ainda.
          Usando "som_palmas_alegria.mp3" como substituto provisório.
          Quando você tiver o arquivo definitivo, troque o src abaixo para "audios/parabens.mp3". -->
-    <audio id="audio-parabens" src="som_palmas_alegria.mp3" preload="auto"></audio>
+    <!-- Não é chamado automaticamente no jogo por enquanto (reservado para uso futuro).
+         Quando você tiver o arquivo "parabens.mp3", basta colocá-lo na raiz do projeto. -->
+    <audio id="audio-parabens" src="parabens.mp3" preload="auto"></audio>
     <audio id="audio-entrada" src="som_entrada_letras.mp3" preload="auto"></audio>
     <audio id="audio-palmas-alegria" src="som_palmas_alegria.mp3" preload="auto"></audio>
     <audio id="audio-fundo" src="fundo_montar_silabas.mp3" loop preload="auto"></audio>
@@ -1505,10 +1507,8 @@
                     avancarFase();
                 }, modoAtual === 2 ? 7500 : 5500);
             } else {
-                setTimeout(() => {
-                    tocarAudio('audio-parabens');
-                }, modoAtual === 2 ? 2500 : 1500);
-
+                // Não toca mais nenhum som extra aqui — som_palmas_alegria.mp3
+                // fica reservado só para a tela de comemoração a cada 10 palavras.
                 setTimeout(() => {
                     avancarFase();
                 }, modoAtual === 2 ? 4500 : 3500);
