@@ -559,8 +559,8 @@
             #teclado-virtual { gap: 10px; padding: 20px; }
         }
 
-        .letra-descendo { position: absolute; font-size: 2rem; font-weight: bold; color: var(--verde-esmeralda); animation: descerLetra 1s ease-out forwards; z-index: 1000; pointer-events: none; }
-        @keyframes descerLetra { from { opacity: 1; transform: translateY(-30px) scale(1.3); } to { opacity: 0; transform: translateY(80px) scale(1); } }
+        .letra-descendo { position: fixed; font-size: 4rem; font-weight: bold; color: var(--verde-esmeralda); animation: descerLetra 1s ease-out forwards; z-index: 1000; pointer-events: none; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        @keyframes descerLetra { from { opacity: 1; transform: translateY(0) scale(1.5); } to { opacity: 0; transform: translateY(120px) scale(0.8); } }
 
         .estrela-flutuante { position: absolute; font-size: 1.5rem; animation: flutuar 2s ease-out forwards; pointer-events: none; z-index: 2000; }
         @keyframes flutuar { 0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); } 100% { opacity: 0; transform: translateY(-150px) scale(1.3) rotate(360deg); } }
@@ -1094,7 +1094,7 @@
                 const tecla = document.createElement('div');
                 tecla.classList.add('tecla-virtual');
                 tecla.innerText = letra;
-                tecla.onclick = () => processarTeclaDigitada(letra);
+                tecla.onclick = () => processarTeclaDigitada(letra, tecla);
                 tecladoVirtual.appendChild(tecla);
             }
 
@@ -1105,7 +1105,7 @@
             tecladoVirtual.appendChild(teclaApagar);
         }
 
-        function processarTeclaDigitada(letra) {
+        function processarTeclaDigitada(letra, eventoTecla) {
             if (interagindo) return;
             if (teclasDigitadas.length >= palavraAlvo.length) return;
 
@@ -1124,7 +1124,7 @@
             teclasDigitadas += letra;
             campoDitado.value = teclasDigitadas;
 
-            criarAnimacaoLetraDescendo(letra);
+            criarAnimacaoLetraDescendo(letra, eventoTecla);
 
             const espacoAlvo = document.getElementById(`espaco-${teclasDigitadas.length - 1}`);
             espacoAlvo.innerText = letra;
@@ -1176,16 +1176,26 @@
             const letraDigitada = valor[valor.length - 1];
             if (letraDigitada && valor.length > teclasDigitadas.length) {
                 e.target.value = teclasDigitadas;
-                processarTeclaDigitada(letraDigitada);
+                // No input físico, não temos elemento de tecla — usa o centro do campo
+                const campoRect = campoDitado.getBoundingClientRect();
+                const campoFake = { getBoundingClientRect: () => campoRect };
+                processarTeclaDigitada(letraDigitada, campoFake);
             }
         });
 
-        function criarAnimacaoLetraDescendo(letra) {
+        function criarAnimacaoLetraDescendo(letra, elementoTecla) {
             const el = document.createElement('div');
             el.classList.add('letra-descendo');
             el.innerText = letra;
-            el.style.left = '50%';
-            el.style.top = '40%';
+
+            const rect = elementoTecla.getBoundingClientRect();
+            const centroX = rect.left + rect.width / 2;
+            const topoY = rect.top;
+
+            el.style.left = centroX + 'px';
+            el.style.top = topoY + 'px';
+            el.style.transform = 'translate(-50%, -100%)';
+
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 1000);
         }
